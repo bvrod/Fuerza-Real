@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fuerza Real Academy | Academia de Fútbol en Toluca | Alto Rendimiento</title>
+  <meta name="description" content="Academia de fútbol de alto rendimiento en Toluca, Guadalupe Totoltepec. Formamos jugadores de 5 a 17 años con entrenamiento profesional, sin favoritismos. ¡Agenda tu clase de prueba gratis!" />
+  <meta name="keywords" content="academia de fútbol en Toluca, entrenamiento de fútbol Guadalupe Totoltepec, escuela de fútbol Toluca, fútbol infantil Toluca, alto rendimiento fútbol Estado de México" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Fuerza Real Academy | Academia de Fútbol en Toluca" />
+  <meta property="og:description" content="Formamos el futuro del fútbol en Toluca. Alto rendimiento y valores para jóvenes de 5 a 17 años." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700;1,900&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#8B21F2',
+              purpleLight: '#A855F7',
+              purpleDark: '#6B12C7',
+              purpleGlow: 'rgba(139,33,242,0.35)',
+              black: '#0A0A0F',
+              blackSoft: '#111118',
+              surface: '#16161F',
+              surfaceUp: '#1E1E2C',
+              white: '#F5F5FA',
+              muted: '#9090A8',
+            }
+          },
+          fontFamily: {
+            display: ['"Barlow Condensed"', 'sans-serif'],
+            body: ['Barlow', 'sans-serif'],
+          },
+          backgroundImage: {
+            'hero-grid': "linear-gradient(rgba(139,33,242,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(139,33,242,0.07) 1px, transparent 1px)",
+          },
+          backgroundSize: {
+            'grid-40': '40px 40px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0A0A0F;
+      color: #F5F5FA;
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0A0A0F; }
+    ::-webkit-scrollbar-thumb { background: #8B21F2; border-radius: 3px; }
+
+    /* ── Noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Header ── */
+    #main-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+    }
+    #main-header.scrolled {
+      background: rgba(10, 10, 15, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(139,33,242,0.3);
+    }
+
+    /* ── Hero diagonal clip ── */
+    .hero-clip {
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+    }
+
+    /* ── Glow effects ── */
+    .glow-purple {
+      box-shadow: 0 0 40px rgba(139,33,242,0.5), 0 0 80px rgba(139,33,242,0.2);
+    }
+    .glow-text {
+      text-shadow: 0 0 60px rgba(139,33,242,0.8);
+    }
+    .purple-line {
+      background: linear-gradient(90deg, transparent, #8B21F2, transparent);
+      height: 1px;
+    }
+
+    /* ── Accent stripe ── */
+    .accent-stripe {
+      background: linear-gradient(135deg, #8B21F2 0%, #6B12C7 100%);
+    }
+
+    /* ── Diagonal text block ── */
+    .italic-hero {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── CTA Button ── */
+    .btn-primary {
+      background: linear-gradient(135deg, #8B21F2, #6B12C7);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex; align-items: center; gap: 0.6rem;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(139,33,242,0.7); }
+    .btn-primary:hover::before { opacity: 1; }
+
+    .btn-ghost {
+      border: 1.5px solid rgba(139,33,242,0.6);
+      color: #A855F7;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-ghost:hover {
+      background: rgba(139,33,242,0.12);
+      border-color: #8B21F2;
+      color: #fff;
+    }
+
+    /* ── Scroll Reveal ── */
+    .sr {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .sr.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .sr-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .sr-left.visible { opacity: 1; transform: translateX(0); }
+    .sr-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .sr-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Card ── */
+    .card {
+      background: #16161F;
+      border: 1px solid rgba(139,33,242,0.18);
+      border-radius: 8px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .card:hover {
+      border-color: rgba(139,33,242,0.6);
+      box-shadow: 0 0 30px rgba(139,33,242,0.15);
+      transform: translateY(-4px);
+    }
+
+    /* ── FAQ Accordion ── */
+    .faq-item { border-bottom: 1px solid rgba(139,33,242,0.2); }
+    .faq-btn {
+      width: 100%; text-align: left;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 0;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-style: italic;
+      font-size: 1.2rem; letter-spacing: 0.02em;
+      color: #F5F5FA;
+      background: none; border: none; cursor: pointer;
+      transition: color 0.2s;
+    }
+    .faq-btn:hover { color: #A855F7; }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1.5px solid rgba(139,33,242,0.5);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, transform 0.3s;
+      color: #8B21F2;
+      font-size: 1.1rem; font-weight: 700;
+    }
+    .faq-btn.open .faq-icon { background: #8B21F2; border-color: #8B21F2; color: #fff; transform: rotate(45deg); }
+    .faq-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      font-size: 1rem; color: #9090A8; line-height: 1.7;
+      padding: 0;
+    }
+    .faq-body.open { max-height: 400px; padding-bottom: 1.4rem; }
+
+    /* ── WA Float Button ── */
+    #wa-float {
+      position: fixed; bottom: 28px; right: 24px; z-index: 999;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, #8B21F2, #22C55E);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 30px rgba(139,33,242,0.6);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: wa-pulse 2.5s infinite;
+    }
+    #wa-float:hover { transform: scale(1.12); box-shadow: 0 6px 40px rgba(34,197,94,0.5); }
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 4px 30px rgba(139,33,242,0.6); }
+      50% { box-shadow: 0 4px 50px rgba(34,197,94,0.7), 0 0 0 8px rgba(34,197,94,0.1); }
+    }
+
+    /* ── Stats counter ── */
+    .stat-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(3rem, 8vw, 5rem);
+      background: linear-gradient(135deg, #A855F7, #8B21F2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-style: italic;
+      font-size: 0.85rem; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B21F2;
+    }
+
+    /* ── Nav link ── */
+    .nav-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-style: italic;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      font-size: 1rem; color: #9090A8;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: #F5F5FA; }
+
+    /* ── Pillar icon bg ── */
+    .pillar-icon {
+      width: 64px; height: 64px; border-radius: 12px;
+      background: rgba(139,33,242,0.15);
+      border: 1px solid rgba(139,33,242,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      transition: background 0.3s;
+    }
+    .card:hover .pillar-icon { background: rgba(139,33,242,0.28); }
+
+    /* ── Amistosos diagonal ── */
+    .amistosos-bg {
+      background: linear-gradient(135deg, #111118 0%, #16161F 50%, #111118 100%);
+      border-top: 1px solid rgba(139,33,242,0.25);
+      border-bottom: 1px solid rgba(139,33,242,0.25);
+      position: relative; overflow: hidden;
+    }
+    .amistosos-bg::before {
+      content: '';
+      position: absolute; top: -50%; right: -20%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(139,33,242,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── Trust badge ── */
+    .trust-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(139,33,242,0.12);
+      border: 1px solid rgba(139,33,242,0.3);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em;
+      color: #A855F7;
+    }
+
+    /* ── Input ── */
+    .form-input {
+      width: 100%;
+      background: #16161F;
+      border: 1.5px solid rgba(139,33,242,0.25);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      color: #F5F5FA;
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input::placeholder { color: #505065; }
+    .form-input:focus {
+      border-color: #8B21F2;
+      box-shadow: 0 0 0 3px rgba(139,33,242,0.15);
+    }
+
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 998;
+      background: rgba(10,10,15,0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2rem;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu .nav-link { font-size: 2rem; color: #F5F5FA; }
+
+    /* ── Responsive hero text ── */
+    .hero-title {
+      font-size: clamp(2.8rem, 8vw, 7.5rem);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+    }
+
+    /* ── Logo ── */
+    .logo-mark {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: linear-gradient(135deg, #8B21F2, #6B12C7);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-style: italic;
+      font-size: 1.2rem; color: white;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+<header id="main-header" class="py-4 px-5 md:px-10">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 group" aria-label="Fuerza Real Academy">
+      <div class="logo-mark">FR</div>
+      <div>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:1.1rem;letter-spacing:0.02em;color:#F5F5FA;">FUERZA REAL</span>
+        <span class="block" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:#8B21F2;margin-top:-2px;">ACADEMY</span>
+      </div>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li><a href="#propuesta" class="nav-link">Propuesta</a></li>
+      <li><a href="#pilares" class="nav-link">Pilares</a></li>
+      <li><a href="#amistosos" class="nav-link">Amistosos</a></li>
+      <li><a href="#faq" class="nav-link">FAQ</a></li>
+      <li><a href="#contacto" class="nav-link">Contacto</a></li>
+    </ul>
+
+    <!-- CTA desktop -->
+    <a href="https://wa.me/527292415226?text=Hola,%20quiero%20agendar%20una%20clase%20de%20prueba%20gratis%20en%20Fuerza%20Real%20Academy" target="_blank" rel="noopener" class="hidden md:inline-flex btn-primary text-sm">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.04 0C5.4 0 .01 5.39.01 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.09-1.6a12.04 12.04 0 005.95 1.52h.01c6.63 0 12.03-5.39 12.03-12.04a11.97 11.97 0 00-3.56-8.4zm-8.48 18.52a9.99 9.99 0 01-5.1-1.39l-.37-.22-3.82 1 1.02-3.72-.24-.38a9.97 9.97 0 01-1.53-5.31C2.01 6.5 6.52 2 12.04 2a9.97 9.97 0 017.07 2.93 9.95 9.95 0 012.93 7.08c0 5.53-4.5 10.03-10.03 10.03l.03-.04zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.18.2-.35.22-.65.07a8.17 8.17 0 01-2.4-1.48 9 9 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.14.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.72.23 1.37.2 1.89.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/></svg>
+      Clase Gratis
+    </a>
+
+    <!-- Hamburger -->
+    <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 z-[1001]" aria-label="Abrir menú">
+      <span class="block w-6 h-0.5 bg-white transition-all" id="bar1"></span>
+      <span class="block w-6 h-0.5 bg-white transition-all" id="bar2"></span>
+      <span class="block w-4 h-0.5 bg-purple-500 transition-all" id="bar3"></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" role="dialog" aria-modal="true">
+  <a href="#propuesta" class="nav-link" onclick="closeMobileMenu()">Propuesta</a>
+  <a href="#pilares" class="nav-link" onclick="closeMobileMenu()">Pilares</a>
+  <a href="#amistosos" class="nav-link" onclick="closeMobileMenu()">Amistosos</a>
+  <a href="#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#contacto" class="nav-link" onclick="closeMobileMenu()">Contacto</a>
+  <a href="https://wa.me/527292415226?text=Hola,%20quiero%20agendar%20una%20clase%20de%20prueba%20gratis%20en%20Fuerza%20Real%20Academy" target="_blank" rel="noopener" class="btn-primary mt-4">Clase de Prueba Gratis</a>
+</div>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="relative min-h-screen flex items-center overflow-hidden" aria-label="Sección principal">
+
+  <!-- Grid bg -->
+  <div class="absolute inset-0 hero-clip" style="background-color:#0E0E16;background-image:linear-gradient(rgba(139,33,242,0.07) 1px, transparent 1px),linear-gradient(90deg, rgba(139,33,242,0.07) 1px, transparent 1px);background-size:48px 48px;"></div>
+
+  <!-- Glow orb -->
+  <div class="absolute" style="top:-15%;right:-10%;width:700px;height:700px;background:radial-gradient(circle, rgba(139,33,242,0.22) 0%, transparent 65%);pointer-events:none;"></div>
+  <div class="absolute" style="bottom:5%;left:-5%;width:400px;height:400px;background:radial-gradient(circle, rgba(139,33,242,0.1) 0%, transparent 70%);pointer-events:none;"></div>
+
+  <!-- Soccer ball silhouette deco -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 opacity-5 hidden lg:block" style="font-size:32rem;line-height:1;user-select:none;pointer-events:none;">⚽</div>
+
+  <div class="relative max-w-7xl mx-auto px-5 md:px-10 pt-32 pb-24 w-full">
+    <div class="max-w-4xl">
+      <!-- Badge -->
+      <div class="trust-badge mb-8 sr">
+        <span>⚡</span>
+        <span>Academia de Fútbol · Toluca · Est. Alto Rendimiento</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="italic-hero hero-title text-white leading-none mb-6 sr" style="transition-delay:0.1s;">
+        <span class="block text-white">FORMAMOS</span>
+        <span class="block" style="color:#8B21F2;">EL FUTURO</span>
+        <span class="block text-white">DEL FÚTBOL</span>
+        <span class="block" style="background:linear-gradient(135deg,#A855F7,#6B12C7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">EN TOLUCA.</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero-sub text-brand-muted max-w-xl mb-4 leading-relaxed sr" style="transition-delay:0.2s;">
+        <strong class="text-white font-semibold">Fuerza Real Academy</strong> — Alto rendimiento y valores para jóvenes de <strong class="text-purple-400">5 a 17 años</strong>. Sin favoritismos, solo talento y disciplina.
+      </p>
+
+      <!-- Lema -->
+      <p class="sr mb-10" style="transition-delay:0.25s;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:700;font-size:1.1rem;letter-spacing:0.12em;text-transform:uppercase;color:#8B21F2;">
+        — Fuerza, Garra y Corazón —
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 sr" style="transition-delay:0.3s;">
+        <a href="https://wa.me/527292415226?text=Hola,%20quiero%20agendar%20una%20clase%20de%20prueba%20gratis%20en%20Fuerza%20Real%20Academy" target="_blank" rel="noopener" class="btn-primary text-base" aria-label="Agendar clase de prueba gratis por WhatsApp">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.04 0C5.4 0 .01 5.39.01 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.09-1.6a12.04 12.04 0 005.95 1.52h.01c6.63 0 12.03-5.39 12.03-12.04a11.97 11.97 0 00-3.56-8.4zm-8.48 18.52a9.99 9.99 0 01-5.1-1.39l-.37-.22-3.82 1 1.02-3.72-.24-.38a9.97 9.97 0 01-1.53-5.31C2.01 6.5 6.52 2 12.04 2a9.97 9.97 0 017.07 2.93 9.95 9.95 0 012.93 7.08c0 5.53-4.5 10.03-10.03 10.03l.03-.04zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.18.2-.35.22-.65.07a8.17 8.17 0 01-2.4-1.48 9 9 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.14.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.72.23 1.37.2 1.89.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/></svg>
+          Agendar Clase de Prueba Gratis
+        </a>
+        <a href="#propuesta" class="btn-ghost text-base">
+          Ver la Propuesta
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Trust row -->
+      <div class="flex flex-wrap gap-6 mt-12 sr" style="transition-delay:0.4s;">
+        <div class="flex items-center gap-2 text-sm text-brand-muted">
+          <span style="color:#8B21F2;font-size:1.2rem;">✔</span>
+          <span>Sin favoritismos</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-brand-muted">
+          <span style="color:#8B21F2;font-size:1.2rem;">✔</span>
+          <span>Entrenadores certificados</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-brand-muted">
+          <span style="color:#8B21F2;font-size:1.2rem;">✔</span>
+          <span>1ra clase gratis, sin compromiso</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-brand-muted">
+          <span style="color:#8B21F2;font-size:1.2rem;">✔</span>
+          <span>Guadalupe Totoltepec, Toluca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom gradient -->
+  <div class="absolute bottom-0 left-0 right-0 h-32" style="background:linear-gradient(to bottom, transparent, #0A0A0F);"></div>
+</section>
+
+<!-- ═══════════════════════════════ STATS ═══════════════════════════════ -->
+<section class="py-16 px-5 md:px-10" aria-label="Estadísticas">
+  <div class="max-w-7xl mx-auto">
+    <div class="purple-line mb-12"></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="sr">
+        <div class="stat-number">+120</div>
+        <p class="text-brand-muted text-sm mt-2 font-medium tracking-wide uppercase" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;">Jugadores Activos</p>
+      </div>
+      <div class="sr" style="transition-delay:0.1s;">
+        <div class="stat-number">12</div>
+        <p class="text-brand-muted text-sm mt-2 font-medium tracking-wide uppercase" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;">Años Formando Campeones</p>
+      </div>
+      <div class="sr" style="transition-delay:0.2s;">
+        <div class="stat-number">5-17</div>
+        <p class="text-brand-muted text-sm mt-2 font-medium tracking-wide uppercase" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;">Años de Edad</p>
+      </div>
+      <div class="sr" style="transition-delay:0.3s;">
+        <div class="stat-number">100%</div>
+        <p class="text-brand-muted text-sm mt-2 font-medium tracking-wide uppercase" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;">Meritocracia Real</p>
+      </div>
+    </div>
+    <div class="purple-line mt-12"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PROPUESTA DEPORTIVA ═══════════════════════════════ -->
+<section id="propuesta" class="py-24 px-5 md:px-10" aria-label="Propuesta deportiva">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 sr">
+      <p class="section-label mb-3">Lo que nos hace diferentes</p>
+      <h2 class="italic-hero text-white" style="font-size:clamp(2.2rem,5vw,4.5rem);">NUESTRA PROPUESTA<br/><span style="color:#8B21F2;">DEPORTIVA</span></h2>
+      <p class="text-brand-muted mt-4 max-w-xl mx-auto leading-relaxed">No prometemos magia. Prometemos estructura, metodología y entrenadores que realmente ven a tu hijo.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="card p-8 sr" style="transition-delay:0.05s;">
+        <div class="pillar-icon mb-6">🎯</div>
+        <h3 class="italic-hero text-white mb-3" style="font-size:1.6rem;">Entrenamiento<br/>por Posición</h3>
+        <p class="text-brand-muted leading-relaxed text-sm">Cada jugador recibe un plan de trabajo específico según su posición. Porteros, defensas, mediocampistas y delanteros entrenan con metodologías diseñadas para su rol en el campo.</p>
+        <div class="mt-6 pt-6 border-t border-purple-900/30">
+          <span class="text-purple-400 text-sm font-semibold" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;">✦ Atención Individual Garantizada</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card p-8 sr" style="transition-delay:0.15s;background:#16161F;border-color:rgba(139,33,242,0.45);">
+        <div class="pillar-icon mb-6" style="background:rgba(139,33,242,0.25);border-color:rgba(139,33,242,0.5);">🔭</div>
+        <h3 class="italic-hero text-white mb-3" style="font-size:1.6rem;">Visorias<br/>Constantes</h3>
+        <p class="text-brand-muted leading-relaxed text-sm">Organizamos visorias periódicas con equipos y clubes de mayor nivel. Tu hijo tendrá la oportunidad real de dar el siguiente paso. El talento aquí sí se ve y se impulsa.</p>
+        <div class="mt-6 pt-6 border-t border-purple-900/30">
+          <span class="text-purple-400 text-sm font-semibold" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;">✦ Tu Talento Tiene un Destino</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card p-8 sr" style="transition-delay:0.25s;">
+        <div class="pillar-icon mb-6">💰</div>
+        <h3 class="italic-hero text-white mb-3" style="font-size:1.6rem;">Precios<br/>Competitivos</h3>
+        <p class="text-brand-muted leading-relaxed text-sm">Calidad profesional no tiene que significar mensualidades imposibles. Nuestros planes son accesibles para familias de Toluca y la zona de Guadalupe Totoltepec.</p>
+        <div class="mt-6 pt-6 border-t border-purple-900/30">
+          <span class="text-purple-400 text-sm font-semibold" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;">✦ Excelencia al Alcance de Tu Familia</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anti-favoritism block -->
+    <div class="mt-12 p-8 md:p-12 rounded-xl sr" style="background:linear-gradient(135deg,#13131C,#1A1A28);border:1px solid rgba(139,33,242,0.35);">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="text-5xl">🛡️</div>
+        <div>
+          <p class="section-label mb-2">Para los papás y mamás</p>
+          <h3 class="italic-hero text-white mb-4" style="font-size:clamp(1.6rem,3.5vw,2.5rem);">AQUÍ NO HAY FAVORITOS.<br/><span style="color:#8B21F2;">SOLO JUGADORES QUE TRABAJAN.</span></h3>
+          <p class="text-brand-muted leading-relaxed max-w-2xl">Entendemos que el mayor miedo de un padre es que su hijo juegue poco porque no es "el hijo de alguien". En Fuerza Real Academy, el tiempo de juego y la atención del entrenador se ganan con esfuerzo, actitud y progreso. <strong class="text-white">Siempre. Sin excepción.</strong></p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <span class="trust-badge">✔ Evaluación mensual objetiva</span>
+            <span class="trust-badge">✔ Comunicación directa con padres</span>
+            <span class="trust-badge">✔ Progreso documentado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PILARES (FUERZA, GARRA, CORAZÓN) ═══════════════════════════════ -->
+<section id="pilares" class="py-24 px-5 md:px-10 relative overflow-hidden" aria-label="Pilares de la academia">
+  <div class="absolute inset-0" style="background:linear-gradient(180deg,#0A0A0F 0%,#0E0E18 50%,#0A0A0F 100%);pointer-events:none;"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full opacity-20" style="background:linear-gradient(to bottom, transparent, #8B21F2, transparent);pointer-events:none;"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+    <div class="text-center mb-20 sr">
+      <p class="section-label mb-3">Los pilares de nuestra academia</p>
+      <h2 class="italic-hero" style="font-size:clamp(2.8rem,7vw,6rem);">
+        <span class="text-white">FUERZA.</span>
+        <span style="color:#8B21F2;"> GARRA.</span>
+        <span class="text-white"> CORAZÓN.</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6">
+      <!-- FUERZA -->
+      <div class="sr-left text-center md:text-left relative">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6" style="background:rgba(139,33,242,0.15);border:2px solid rgba(139,33,242,0.4);">
+          <span style="font-size:2.2rem;">💪</span>
+        </div>
+        <div class="section-label mb-2">Pilar 01</div>
+        <h3 class="italic-hero text-white mb-4" style="font-size:2.8rem;">FUERZA</h3>
+        <p class="text-brand-muted leading-relaxed">Preparación física periodizada adaptada a cada categoría. Desarrollamos potencia, velocidad, resistencia y coordinación desde la infancia. El cuerpo del atleta es el primer instrumento.</p>
+        <div class="mt-6 h-1 w-16 rounded-full" style="background:linear-gradient(90deg,#8B21F2,transparent);"></div>
+      </div>
+
+      <!-- GARRA -->
+      <div class="sr text-center relative" style="transition-delay:0.15s;">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6" style="background:rgba(139,33,242,0.25);border:2px solid #8B21F2;">
+          <span style="font-size:2.2rem;">🔥</span>
+        </div>
+        <div class="section-label mb-2">Pilar 02</div>
+        <h3 class="italic-hero mb-4 glow-text" style="font-size:2.8rem;color:#8B21F2;">GARRA</h3>
+        <p class="text-brand-muted leading-relaxed">La actitud es entrenable. Trabajamos la mentalidad competitiva, la resiliencia ante la derrota y el compromiso con el equipo. El jugador que nunca se rinde es el que llega lejos.</p>
+        <div class="mt-6 h-1 w-16 rounded-full mx-auto" style="background:linear-gradient(90deg,transparent,#8B21F2,transparent);"></div>
+      </div>
+
+      <!-- CORAZÓN -->
+      <div class="sr-right text-center md:text-right relative" style="transition-delay:0.3s;">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6" style="background:rgba(139,33,242,0.15);border:2px solid rgba(139,33,242,0.4);">
+          <span style="font-size:2.2rem;">❤️</span>
+        </div>
+        <div class="section-label mb-2">Pilar 03</div>
+        <h3 class="italic-hero text-white mb-4" style="font-size:2.8rem;">CORAZÓN</h3>
+        <p class="text-brand-muted leading-relaxed">El fútbol es deporte de equipo y de vida. Inculcamos respeto, compañerismo, disciplina y amor propio. Formamos personas íntegras antes que jugadores de élite.</p>
+        <div class="mt-6 h-1 w-16 rounded-full ml-auto" style="background:linear-gradient(90deg,transparent,#8B21F2);"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ AMISTOSOS ═══════════════════════════════ -->
+<section id="amistosos" class="py-24 px-5 md:px-10 amistosos-bg" aria-label="Solicitar partido amistoso">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div class="sr-left">
+        <p class="section-label mb-3">Para otros clubes y academias</p>
+        <h2 class="italic-hero text-white mb-6" style="font-size:clamp(2.2rem,5vw,4rem);">¿TU CLUB QUIERE<br/><span style="color:#8B21F2;">UN AMISTOSO</span><br/>EN TOLUCA?</h2>
+        <p class="text-brand-muted leading-relaxed mb-6">Abrimos nuestras puertas a clubs y academias de fútbol que quieran disputar partidos amistosos en la zona de Guadalupe Totoltepec, Toluca. Competencia sana, aprendizaje mutuo y fair play.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-brand-muted"><span style="color:#8B21F2;font-size:1.1rem;margin-top:2px;">▶</span><span>Todas las categorías de 5 a 17 años</span></li>
+          <li class="flex items-start gap-3 text-brand-muted"><span style="color:#8B21F2;font-size:1.1rem;margin-top:2px;">▶</span><span>Coordinamos horarios y logística sin problema</span></li>
+          <li class="flex items-start gap-3 text-brand-muted"><span style="color:#8B21F2;font-size:1.1rem;margin-top:2px;">▶</span><span>Campo disponible en Barrio de Guadalupe Totoltepec</span></li>
+          <li class="flex items-start gap-3 text-brand-muted"><span style="color:#8B21F2;font-size:1.1rem;margin-top:2px;">▶</span><span>Ambiente competitivo, respeto total</span></li>
+        </ul>
+        <a href="https://wa.me/527292415226?text=Hola,%20soy%20de%20un%20club%20y%20quiero%20solicitar%20un%20partido%20amistoso%20con%20Fuerza%20Real%20Academy" target="_blank" rel="noopener" class="btn-primary inline-flex">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.04 0C5.4 0 .01 5.39.01 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.09-1.6a12.04 12.04 0 005.95 1.52h.01c6.63 0 12.03-5.39 12.03-12.04a11.97 11.97 0 00-3.56-8.4zm-8.48 18.52a9.99 9.99 0 01-5.1-1.39l-.37-.22-3.82 1 1.02-3.72-.24-.38a9.97 9.97 0 01-1.53-5.31C2.01 6.5 6.52 2 12.04 2a9.97 9.97 0 017.07 2.93 9.95 9.95 0 012.93 7.08c0 5.53-4.5 10.03-10.03 10.03l.03-.04zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.18.2-.35.22-.65.07a8.17 8.17 0 01-2.4-1.48 9 9 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.14.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.72.23 1.37.2 1.89.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/></svg>
+          Solicitar Amistoso por WhatsApp
+        </a>
+      </div>
+
+      <!-- Form -->
+      <div class="card p-8 sr-right">
+        <h3 class="italic-hero text-white mb-2" style="font-size:1.8rem;">CONTACTO DIRECTO</h3>
+        <p class="text-brand-muted text-sm mb-6">Déjanos tus datos y te contactamos en menos de 24 horas.</p>
+        <div id="amistosos-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-brand-muted mb-1.5">Nombre del Club / Academia *</label>
+            <input id="club-name" type="text" class="form-input" placeholder="Ej. Club Deportivo Metepec FC" />
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-brand-muted mb-1.5">Categoría *</label>
+              <select id="club-cat" class="form-input" style="cursor:pointer;">
+                <option value="" style="background:#16161F;">Selecciona...</option>
+                <option value="sub7" style="background:#16161F;">Sub 7</option>
+                <option value="sub9" style="background:#16161F;">Sub 9</option>
+                <option value="sub11" style="background:#16161F;">Sub 11</option>
+                <option value="sub13" style="background:#16161F;">Sub 13</option>
+                <option value="sub15" style="background:#16161F;">Sub 15</option>
+                <option value="sub17" style="background:#16161F;">Sub 17</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-brand-muted mb-1.5">Ciudad</label>
+              <input id="club-city" type="text" class="form-input" placeholder="Ej. Metepec" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-brand-muted mb-1.5">WhatsApp del Coordinador *</label>
+            <input id="club-wa" type="tel" class="form-input" placeholder="+52 722 000 0000" />
+          </div>
+          <button onclick="sendAmistososWA()" class="btn-primary w-full justify-center mt-2">
+            Enviar Solicitud de Amistoso
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FAQ ═══════════════════════════════ -->
+<section id="faq" class="py-24 px-5 md:px-10" aria-label="Preguntas frecuentes">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-16 sr">
+      <p class="section-label mb-3">Resolvemos todas tus dudas</p>
+      <h2 class="italic-hero text-white" style="font-size:clamp(2.2rem,5vw,4rem);">PREGUNTAS<br/><span style="color:#8B21F2;">FRECUENTES</span></h2>
+    </div>
+
+    <div class="sr">
+      <!-- FAQ 1 -->
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFAQ(this)" aria-expanded="false">
+          <span>¿Cuáles son los horarios de entrenamiento?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          Entrenamos de <strong style="color:#A855F7;">Lunes a Viernes</strong> de 4:00 PM a 6:00 PM para que se adapte a la agenda escolar de tu hijo. Contáctanos por WhatsApp para conocer lo que te ofrece Fuerza Real Academy y agendar tu clase de prueba gratis.
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFAQ(this)" aria-expanded="false">
+          <span>¿Hay partidos o competencias durante la semana?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          ¡Sí! Los <strong style="color:#A855F7;">sábados son el día de competencia</strong>. Disputamos partidos amistosos y de liga con otros equipos de Toluca y el Estado de México. Creemos que la competencia sana es parte esencial del aprendizaje y del disfrute del deporte.
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFAQ(this)" aria-expanded="false">
+          <span>¿Dónde están ubicados?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          Nos encontramos en el <strong style="color:#A855F7;">Barrio de Guadalupe Totoltepec, Toluca</strong>, junto a la Primaria Fabián L. Cuenca. Es una zona bien comunicada y con fácil acceso en transporte público. Al agendar tu clase de prueba te enviamos la ubicación exacta por WhatsApp.
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFAQ(this)" aria-expanded="false">
+          <span>¿Puedo llevar a mi hijo sin experiencia previa?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          ¡Por supuesto! Recibimos jugadores de <strong style="color:#A855F7;">todos los niveles</strong>, desde principiantes absolutos hasta jugadores con experiencia. Nuestros entrenadores evalúan el nivel de cada jugador y lo integran a la categoría y grupo adecuado para su desarrollo.
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFAQ(this)" aria-expanded="false">
+          <span>¿Qué pasa si mi hijo no juega mucho? ¿Hay favoritismos?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          Es nuestra política más firme: <strong style="color:#A855F7;">cero favoritismos</strong>. El tiempo de juego y las oportunidades se determinan por el esfuerzo, la actitud y el progreso de cada jugador, documentados por nuestros entrenadores. Los padres tienen comunicación directa con el cuerpo técnico en cualquier momento. Tu hijo siempre sabrá en qué trabaja y por qué.
+        </div>
+      </div>
+
+      <!-- FAQ 6 -->
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFAQ(this)" aria-expanded="false">
+          <span>¿Cuánto cuesta la inscripción y la mensualidad?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          Manejamos precios competitivos pensados para familias de Toluca. La <strong style="color:#A855F7;">primera clase de prueba es completamente gratis</strong> y sin compromiso. Al término de esa clase, te daremos toda la información sobre planes y costos. Contáctanos por WhatsApp para más detalles.
+        </div>
+      </div>
+
+      <!-- FAQ 7 -->
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFAQ(this)" aria-expanded="false">
+          <span>¿Ofrecen visorias para equipos de mayor nivel?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-body">
+          Sí. Organizamos <strong style="color:#A855F7;">visorias periódicas</strong> con representantes de equipos y ligas de nivel superior. Los jugadores que demuestran talento y disciplina obtienen visibilidad real. También apoyamos a los jugadores en su proceso de búsqueda si tienen el nivel para avanzar.
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA after FAQ -->
+    <div class="text-center mt-16 sr">
+      <p class="text-brand-muted mb-6">¿Tienes otra pregunta? Escríbenos directamente.</p>
+      <a href="https://wa.me/527292415226?text=Hola,%20tengo%20una%20pregunta%20sobre%20Fuerza%20Real%20Academy" target="_blank" rel="noopener" class="btn-primary">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.04 0C5.4 0 .01 5.39.01 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.09-1.6a12.04 12.04 0 005.95 1.52h.01c6.63 0 12.03-5.39 12.03-12.04a11.97 11.97 0 00-3.56-8.4zm-8.48 18.52a9.99 9.99 0 01-5.1-1.39l-.37-.22-3.82 1 1.02-3.72-.24-.38a9.97 9.97 0 01-1.53-5.31C2.01 6.5 6.52 2 12.04 2a9.97 9.97 0 017.07 2.93 9.95 9.95 0 012.93 7.08c0 5.53-4.5 10.03-10.03 10.03l.03-.04zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.18.2-.35.22-.65.07a8.17 8.17 0 01-2.4-1.48 9 9 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.14.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.72.23 1.37.2 1.89.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/></svg>
+        Escríbenos por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CONTACTO & UBICACIÓN ═══════════════════════════════ -->
+<section id="contacto" class="py-24 px-5 md:px-10" style="background:#0D0D14;" aria-label="Contacto y ubicación">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 sr">
+      <p class="section-label mb-3">Estamos cerca de ti</p>
+      <h2 class="italic-hero text-white" style="font-size:clamp(2.2rem,5vw,4rem);">ENCUÉNTRANOS<br/><span style="color:#8B21F2;">EN TOLUCA</span></h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+      <!-- Info de contacto + redes -->
+      <div class="sr-left space-y-8">
+        <!-- Teléfono / WhatsApp -->
+        <div class="card p-6 flex gap-5 items-start">
+          <div class="pillar-icon flex-shrink-0" style="width:52px;height:52px;font-size:1.4rem;">📱</div>
+          <div>
+            <p class="section-label mb-1">WhatsApp & Teléfono</p>
+            <a href="https://wa.me/527292415226?text=Hola,%20me%20interesa%20Fuerza%20Real%20Academy" target="_blank" rel="noopener"
+               style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:900;font-style:italic;color:#F5F5FA;transition:color .2s;"
+               onmouseover="this.style.color='#A855F7'" onmouseout="this.style.color='#F5F5FA'">
+              729 241 5226
+            </a>
+            <p class="text-brand-muted text-sm mt-1">Escríbenos para agendar tu clase de prueba gratis</p>
+          </div>
+        </div>
+
+        <!-- Ubicación -->
+        <div class="card p-6 flex gap-5 items-start">
+          <div class="pillar-icon flex-shrink-0" style="width:52px;height:52px;font-size:1.4rem;">📍</div>
+          <div>
+            <p class="section-label mb-1">Ubicación</p>
+            <p style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;color:#F5F5FA;line-height:1.3;">
+              Barrio de Guadalupe Totoltepec<br/>
+              <span style="color:#A855F7;">Junto a Primaria Fabián L. Cuenca</span>
+            </p>
+            <p class="text-brand-muted text-sm mt-1">Toluca, Estado de México</p>
+            <a href="https://maps.app.goo.gl/46B6of4nPxrasWsZ7" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 mt-3 text-sm font-semibold"
+               style="color:#8B21F2;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;text-transform:uppercase;transition:color .2s;"
+               onmouseover="this.style.color='#A855F7'" onmouseout="this.style.color='#8B21F2'">
+              Ver en Google Maps
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="card p-6">
+          <p class="section-label mb-5">Síguenos en Redes</p>
+          <div class="flex flex-col gap-4">
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/fuerza_real_fc?igsh=MjBjMHplMWN6c2s1" target="_blank" rel="noopener"
+               class="flex items-center gap-4 group" aria-label="Instagram de Fuerza Real Academy">
+              <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </div>
+              <div>
+                <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;color:#F5F5FA;transition:color .2s;" class="group-hover:text-purple-400">@fuerza_real_fc</p>
+                <p class="text-brand-muted text-xs">Instagram</p>
+              </div>
+              <svg class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" width="16" height="16" fill="none" stroke="#8B21F2" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@fuerza.real66?_r=1&_t=ZS-957wnd309cP" target="_blank" rel="noopener"
+               class="flex items-center gap-4 group" aria-label="TikTok de Fuerza Real Academy">
+              <div style="width:44px;height:44px;border-radius:10px;background:#010101;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+              </div>
+              <div>
+                <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;color:#F5F5FA;" class="group-hover:text-purple-400 transition-colors">@fuerza.real66</p>
+                <p class="text-brand-muted text-xs">TikTok</p>
+              </div>
+              <svg class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" width="16" height="16" fill="none" stroke="#8B21F2" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/1DcKfptxpV/" target="_blank" rel="noopener"
+               class="flex items-center gap-4 group" aria-label="Facebook de Fuerza Real Academy">
+              <div style="width:44px;height:44px;border-radius:10px;background:#1877f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </div>
+              <div>
+                <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;color:#F5F5FA;" class="group-hover:text-purple-400 transition-colors">Fuerza Real Academy</p>
+                <p class="text-brand-muted text-xs">Facebook</p>
+              </div>
+              <svg class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" width="16" height="16" fill="none" stroke="#8B21F2" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa embebido -->
+      <div class="sr-right">
+        <div class="card overflow-hidden" style="border-color:rgba(139,33,242,0.4);">
+          <div style="background:rgba(139,33,242,0.08);padding:1rem 1.25rem;border-bottom:1px solid rgba(139,33,242,0.2);display:flex;align-items:center;gap:0.6rem;">
+            <span style="font-size:1.1rem;">📍</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:1rem;color:#F5F5FA;letter-spacing:0.04em;">
+              Primaria Fabián L. Cuenca · Guadalupe Totoltepec, Toluca
+            </span>
+          </div>
+          <div style="position:relative;width:100%;padding-bottom:60%;height:0;overflow:hidden;">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5!2d-99.6605!3d19.2740!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d27596d152fbb7%3A0x6bc94011ee9ec39!2sPRIMARIA%20FABIAN%20L.%20CUENCA!5e0!3m2!1ses!2smx!4v1710000000000!5m2!1ses!2smx"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;filter:grayscale(30%) invert(5%);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Ubicación Fuerza Real Academy - Primaria Fabián L. Cuenca, Guadalupe Totoltepec, Toluca">
+            </iframe>
+          </div>
+          <div style="padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;">
+            <p class="text-brand-muted text-sm">Lun–Vie: Entrenamiento · Sáb: Partidos</p>
+            <a href="https://maps.app.goo.gl/46B6of4nPxrasWsZ7" target="_blank" rel="noopener"
+               class="btn-ghost" style="padding:.5rem 1.1rem;font-size:.85rem;">
+              Abrir en Maps
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FINAL CTA ═══════════════════════════════ -->
+<section class="py-24 px-5 md:px-10 relative overflow-hidden" aria-label="Llamada a la acción final">
+  <div class="absolute inset-0" style="background:linear-gradient(135deg,#0E0E18 0%,#12101E 100%);"></div>
+  <div class="absolute inset-0" style="background-image:linear-gradient(rgba(139,33,242,0.08) 1px, transparent 1px),linear-gradient(90deg, rgba(139,33,242,0.08) 1px, transparent 1px);background-size:48px 48px;"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="width:800px;height:800px;background:radial-gradient(circle, rgba(139,33,242,0.18) 0%, transparent 60%);pointer-events:none;"></div>
+
+  <div class="relative max-w-4xl mx-auto text-center sr">
+    <p class="section-label mb-6">¿Listo para dar el primer paso?</p>
+    <h2 class="italic-hero text-white mb-4" style="font-size:clamp(2.8rem,7vw,6rem);">
+      LA PRIMERA<br/><span style="color:#8B21F2;">CLASE ES GRATIS.</span><br/>EL CAMBIO ES REAL.
+    </h2>
+    <p class="text-brand-muted max-w-xl mx-auto mb-10 leading-relaxed">Agenda hoy mismo la clase de prueba gratuita de tu hijo. Sin compromiso, sin letras chicas. Solo fútbol, formación y una familia deportiva que realmente se preocupa por tu jugador.</p>
+    <a href="https://wa.me/527292415226?text=Hola,%20quiero%20agendar%20la%20clase%20de%20prueba%20gratis%20para%20mi%20hijo%20en%20Fuerza%20Real%20Academy%20Toluca" target="_blank" rel="noopener" class="btn-primary text-lg glow-purple">
+      <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.04 0C5.4 0 .01 5.39.01 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.09-1.6a12.04 12.04 0 005.95 1.52h.01c6.63 0 12.03-5.39 12.03-12.04a11.97 11.97 0 00-3.56-8.4zm-8.48 18.52a9.99 9.99 0 01-5.1-1.39l-.37-.22-3.82 1 1.02-3.72-.24-.38a9.97 9.97 0 01-1.53-5.31C2.01 6.5 6.52 2 12.04 2a9.97 9.97 0 017.07 2.93 9.95 9.95 0 012.93 7.08c0 5.53-4.5 10.03-10.03 10.03l.03-.04zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.18.2-.35.22-.65.07a8.17 8.17 0 01-2.4-1.48 9 9 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.14.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.72.23 1.37.2 1.89.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/></svg>
+      Agendar Clase Gratis Ahora
+    </a>
+    <p class="text-brand-muted text-xs mt-5">
+      📍 <a href="https://maps.app.goo.gl/46B6of4nPxrasWsZ7" target="_blank" rel="noopener" style="color:#8B21F2;text-decoration:underline;text-underline-offset:3px;">Barrio de Guadalupe Totoltepec, junto a Primaria Fabián L. Cuenca · Toluca, Edo. Méx.</a>
+      &nbsp;·&nbsp; 📞 <a href="https://wa.me/527292415226" target="_blank" rel="noopener" style="color:#8B21F2;">729 241 5226</a>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer class="py-10 px-5 md:px-10" style="border-top:1px solid rgba(139,33,242,0.2);" role="contentinfo">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <div class="logo-mark">FR</div>
+        <div>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:1rem;color:#F5F5FA;">FUERZA REAL ACADEMY</span>
+          <p class="text-brand-muted text-xs mt-0.5">Academia de Fútbol · Toluca · Guadalupe Totoltepec</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 text-sm text-brand-muted">
+        <a href="#propuesta" class="hover:text-white transition-colors">Propuesta</a>
+        <a href="#pilares" class="hover:text-white transition-colors">Pilares</a>
+        <a href="#amistosos" class="hover:text-white transition-colors">Amistosos</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+        <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+        <a href="https://wa.me/527292415226" target="_blank" rel="noopener" class="hover:text-purple-400 transition-colors" style="color:#8B21F2;">WhatsApp</a>
+      </div>
+      <!-- Social icons row -->
+      <div class="flex items-center gap-4 mt-4 md:mt-0">
+        <a href="https://www.instagram.com/fuerza_real_fc?igsh=MjBjMHplMWN6c2s1" target="_blank" rel="noopener" aria-label="Instagram"
+           style="width:36px;height:36px;border-radius:8px;background:rgba(139,33,242,0.15);border:1px solid rgba(139,33,242,0.3);display:flex;align-items:center;justify-content:center;transition:background .2s;"
+           onmouseover="this.style.background='rgba(139,33,242,0.35)'" onmouseout="this.style.background='rgba(139,33,242,0.15)'">
+          <svg width="17" height="17" fill="#A855F7" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@fuerza.real66?_r=1&_t=ZS-957wnd309cP" target="_blank" rel="noopener" aria-label="TikTok"
+           style="width:36px;height:36px;border-radius:8px;background:rgba(139,33,242,0.15);border:1px solid rgba(139,33,242,0.3);display:flex;align-items:center;justify-content:center;transition:background .2s;"
+           onmouseover="this.style.background='rgba(139,33,242,0.35)'" onmouseout="this.style.background='rgba(139,33,242,0.15)'">
+          <svg width="17" height="17" fill="#A855F7" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/1DcKfptxpV/" target="_blank" rel="noopener" aria-label="Facebook"
+           style="width:36px;height:36px;border-radius:8px;background:rgba(139,33,242,0.15);border:1px solid rgba(139,33,242,0.3);display:flex;align-items:center;justify-content:center;transition:background .2s;"
+           onmouseover="this.style.background='rgba(139,33,242,0.35)'" onmouseout="this.style.background='rgba(139,33,242,0.15)'">
+          <svg width="17" height="17" fill="#A855F7" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+      <p class="text-brand-muted text-xs text-center">© 2025 Fuerza Real Academy. Todos los derechos reservados.</p>
+    </div>
+    <!-- SEO text -->
+    <p class="text-xs text-center mt-6" style="color:#303040;font-size:0.7rem;">Academia de fútbol en Toluca | Entrenamiento de fútbol en Guadalupe Totoltepec | Escuela de fútbol infantil Toluca | Alto rendimiento fútbol Estado de México | Clases de fútbol para niños Toluca</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════ WA FLOAT ═══════════════════════════════ -->
+<a id="wa-float" href="https://wa.me/527292415226?text=Hola,%20me%20interesa%20Fuerza%20Real%20Academy" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.04 0C5.4 0 .01 5.39.01 12.04c0 2.12.55 4.19 1.6 6.01L0 24l6.09-1.6a12.04 12.04 0 005.95 1.52h.01c6.63 0 12.03-5.39 12.03-12.04a11.97 11.97 0 00-3.56-8.4zm-8.48 18.52a9.99 9.99 0 01-5.1-1.39l-.37-.22-3.82 1 1.02-3.72-.24-.38a9.97 9.97 0 01-1.53-5.31C2.01 6.5 6.52 2 12.04 2a9.97 9.97 0 017.07 2.93 9.95 9.95 0 012.93 7.08c0 5.53-4.5 10.03-10.03 10.03l.03-.04zm5.5-7.5c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.18.2-.35.22-.65.07a8.17 8.17 0 01-2.4-1.48 9 9 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.14.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.64.72.23 1.37.2 1.89.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.27-.2-.57-.35z"/></svg>
+</a>
+
+<!-- ═══════════════════════════════ JS ═══════════════════════════════ -->
+<script>
+  // ── Sticky header ──
+  const header = document.getElementById('main-header');
+  const onScroll = () => {
+    if (window.scrollY > 60) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── Mobile menu ──
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+  let menuOpen = false;
+
+  menuToggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      mobileMenu.classList.add('open');
+      bar1.style.transform = 'rotate(45deg) translate(5px, 5px)';
+      bar2.style.opacity = '0';
+      bar3.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      bar3.style.width = '24px';
+      document.body.style.overflow = 'hidden';
+    } else {
+      closeMobileMenu();
+    }
+  });
+
+  function closeMobileMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    bar1.style.transform = '';
+    bar2.style.opacity = '';
+    bar3.style.transform = '';
+    bar3.style.width = '';
+    document.body.style.overflow = '';
+  }
+
+  // ── Scroll Reveal ──
+  const srElements = document.querySelectorAll('.sr, .sr-left, .sr-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  srElements.forEach(el => observer.observe(el));
+
+  // Trigger initial visible elements
+  srElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) el.classList.add('visible');
+  });
+
+  // ── FAQ Accordion ──
+  function toggleFAQ(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    
+    // Close all
+    document.querySelectorAll('.faq-btn').forEach(b => {
+      b.classList.remove('open');
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.classList.remove('open');
+    });
+
+    // Open clicked if was closed
+    if (!isOpen) {
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      body.classList.add('open');
+    }
+  }
+
+  // ── Amistosos form → WhatsApp ──
+  function sendAmistososWA() {
+    const club = document.getElementById('club-name').value.trim();
+    const cat = document.getElementById('club-cat').value;
+    const city = document.getElementById('club-city').value.trim();
+    const wa = document.getElementById('club-wa').value.trim();
+
+    if (!club || !cat || !wa) {
+      const inputs = ['club-name', 'club-cat', 'club-wa'];
+      inputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          el.style.borderColor = '#ef4444';
+          el.focus();
+          setTimeout(() => el.style.borderColor = '', 2000);
+        }
+      });
+      return;
+    }
+
+    const catMap = { sub7:'Sub 7', sub9:'Sub 9', sub11:'Sub 11', sub13:'Sub 13', sub15:'Sub 15', sub17:'Sub 17' };
+    const msg = `Hola, soy de *${club}* (${city || 'Toluca'}) y quiero solicitar un partido amistoso en la categoría *${catMap[cat] || cat}*. Mi WhatsApp de coordinación es: ${wa}. ¡Espero su respuesta!`;
+    window.open(`https://wa.me/527292415226?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  }
+
+  // ── Smooth scroll for anchor links ──
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
