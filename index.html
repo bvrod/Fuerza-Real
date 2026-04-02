@@ -682,6 +682,21 @@
     .uniforms-section-bg {
       background: #0A0A0F;
     }
+
+    .logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
   </style>
 </head>
 <body>
@@ -689,22 +704,30 @@
 <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
 <header id="main-header" class="py-4 px-5 md:px-10">
   <nav class="max-w-7xl mx-auto flex items-center justify-between">
+    
     <!-- Logo -->
     <a href="#" class="flex items-center gap-3 group" aria-label="Fuerza Real Academy">
-      <div class="logo-mark">FR</div>
+      
+      <img src="imagenes/fuerza real/escudo.jpeg" alt="Fuerza Real Academy Logo" class="logo-img">
+
       <div>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:1.1rem;letter-spacing:0.02em;color:#F5F5FA;">FUERZA REAL</span>
-        <span class="block" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:#8B21F2;margin-top:-2px;">ACADEMY</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:1.1rem;letter-spacing:0.02em;color:#F5F5FA;">
+          FUERZA REAL
+        </span>
+        <span class="block" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:#8B21F2;margin-top:-2px;">
+          ACADEMY
+        </span>
       </div>
+
     </a>
 
     <!-- Desktop nav -->
     <ul class="hidden md:flex items-center gap-8">
       <li><a href="#propuesta" class="nav-link">Propuesta</a></li>
       <li><a href="#pilares" class="nav-link">Pilares</a></li>
-      <li><a href="#amistosos" class="nav-link">Amistosos</a></li>
       <li><a href="#galeria" class="nav-link">Galería</a></li>
       <li><a href="#uniformes" class="nav-link">Uniformes</a></li>
+      <li><a href="#amistosos" class="nav-link">Amistosos</a></li>
       <li><a href="#faq" class="nav-link">FAQ</a></li>
       <li><a href="#contacto" class="nav-link">Contacto</a></li>
     </ul>
