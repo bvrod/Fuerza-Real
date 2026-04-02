@@ -356,6 +356,332 @@
       font-size: 1.2rem; color: white;
       flex-shrink: 0;
     }
+
+    /* ══════════════════════════════════════════════
+       GALERÍA ── GRID
+    ══════════════════════════════════════════════ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #16161F;
+      /* skeleton shimmer antes de cargar */
+      min-height: 220px;
+    }
+
+    /* Skeleton shimmer */
+    .gallery-item::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(139,33,242,0.08) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
+      z-index: 1;
+      border-radius: 16px;
+    }
+    .gallery-item.loaded::before { display: none; }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+
+    .gallery-item img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      border-radius: 16px;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  filter 0.4s cubic-bezier(0.4,0,0.2,1);
+      opacity: 0;
+      /* fade-in al cargar */
+      transition: opacity 0.5s ease,
+                  transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                  filter 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .gallery-item.loaded img { opacity: 1; }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.08);
+    }
+
+    /* Overlay hover */
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(
+        to top,
+        rgba(10,10,15,0.82) 0%,
+        rgba(107,18,199,0.28) 55%,
+        transparent 100%
+      );
+      opacity: 0;
+      transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1);
+      display: flex; align-items: flex-end;
+      padding: 1.2rem;
+      z-index: 2;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-overlay-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-style: italic;
+      font-size: 1rem; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      display: flex; align-items: center; gap: 0.5rem;
+      transform: translateY(6px);
+      transition: transform 0.35s ease;
+    }
+    .gallery-item:hover .gallery-overlay-text { transform: translateY(0); }
+
+    /* Border glow on hover */
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 16px;
+      border: 1.5px solid rgba(139,33,242,0);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .gallery-item:hover::after {
+      border-color: rgba(139,33,242,0.6);
+      box-shadow: inset 0 0 20px rgba(139,33,242,0.08);
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(6,6,10,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    #lightbox.open { display: flex; }
+
+    #lightbox-inner {
+      position: relative;
+      max-width: min(90vw, 960px);
+      max-height: 90vh;
+      animation: lb-in 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes lb-in {
+      from { transform: scale(0.88); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    #lightbox-img {
+      display: block;
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 16px;
+      object-fit: contain;
+      box-shadow: 0 0 60px rgba(139,33,242,0.35), 0 24px 80px rgba(0,0,0,0.7);
+    }
+
+    #lightbox-caption {
+      margin-top: 0.75rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-style: italic;
+      font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #A855F7; text-align: center;
+    }
+
+    #lightbox-close {
+      position: absolute; top: -14px; right: -14px;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #8B21F2;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.3rem; line-height: 1;
+      box-shadow: 0 4px 20px rgba(139,33,242,0.5);
+      transition: background 0.2s, transform 0.2s;
+    }
+    #lightbox-close:hover { background: #A855F7; transform: scale(1.1); }
+
+    #lightbox-prev, #lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(22,22,31,0.85);
+      border: 1.5px solid rgba(139,33,242,0.5);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: #A855F7; font-size: 1.3rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    #lightbox-prev:hover, #lightbox-next:hover {
+      background: rgba(139,33,242,0.2);
+      border-color: #8B21F2;
+    }
+    #lightbox-prev { left: -56px; }
+    #lightbox-next { right: -56px; }
+
+    @media (max-width: 640px) {
+      #lightbox-prev { left: 0; }
+      #lightbox-next { right: 0; }
+    }
+
+    /* ══════════════════════════════════════════════
+       UNIFORMES
+    ══════════════════════════════════════════════ */
+    .uniforms-year-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-style: italic;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 0.95;
+      color: #F5F5FA;
+      position: relative; display: inline-block;
+    }
+    .uniforms-year-label span {
+      color: #8B21F2;
+    }
+    .uniforms-year-label::after {
+      content: '';
+      position: absolute; left: 0; bottom: -6px;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, #8B21F2, transparent);
+      border-radius: 2px;
+    }
+
+    .uniforms-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 1024px) {
+      .uniforms-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .uniforms-grid { grid-template-columns: 1fr; }
+    }
+
+    /* 2-col grid for uniforms (2 per year) */
+    .uniforms-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    @media (max-width: 640px) {
+      .uniforms-grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .uniform-card {
+      background: #111118;
+      border: 1px solid rgba(107,33,168,0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      display: flex; flex-direction: column;
+      /* fade-in via IntersectionObserver */
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease,
+                  border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .uniform-card.visible {
+      opacity: 1; transform: translateY(0);
+    }
+    .uniform-card:hover {
+      border-color: #8B21F2;
+      box-shadow: 0 0 0 1px rgba(139,33,242,0.2),
+                  0 8px 40px rgba(139,33,242,0.18);
+      transform: translateY(-5px);
+    }
+
+    .uniform-img-wrap {
+      position: relative;
+      background: #16161F;
+      overflow: hidden;
+      /* skeleton */
+      min-height: 220px;
+    }
+    .uniform-img-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(139,33,242,0.07) 50%,
+        rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
+    }
+    .uniform-card.img-loaded .uniform-img-wrap::before { display: none; }
+
+    .uniform-img-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .uniform-card.img-loaded .uniform-img-wrap img { opacity: 1; }
+    .uniform-card:hover .uniform-img-wrap img { transform: scale(1.04); }
+
+    /* badge en esquina */
+    .uniform-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(139,33,242,0.85);
+      backdrop-filter: blur(6px);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-style: italic;
+      font-size: 0.78rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #fff;
+    }
+
+    .uniform-info {
+      padding: 1rem 1.1rem 1.2rem;
+      flex: 1; display: flex; flex-direction: column; gap: 4px;
+    }
+    .uniform-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-style: italic;
+      font-size: 1.1rem; letter-spacing: 0.04em;
+      color: #F5F5FA;
+    }
+    .uniform-detail {
+      font-size: 0.8rem; color: #9090A8;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    /* separator between year blocks */
+    .year-divider {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin: 3rem 0 2.5rem;
+    }
+    .year-divider::before, .year-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139,33,242,0.35), transparent);
+    }
+
+    /* Gallery section bg */
+    .gallery-section-bg {
+      background: #0D0D14;
+      border-top: 1px solid rgba(139,33,242,0.18);
+      border-bottom: 1px solid rgba(139,33,242,0.18);
+    }
+    .uniforms-section-bg {
+      background: #0A0A0F;
+    }
   </style>
 </head>
 <body>
@@ -377,6 +703,8 @@
       <li><a href="#propuesta" class="nav-link">Propuesta</a></li>
       <li><a href="#pilares" class="nav-link">Pilares</a></li>
       <li><a href="#amistosos" class="nav-link">Amistosos</a></li>
+      <li><a href="#galeria" class="nav-link">Galería</a></li>
+      <li><a href="#uniformes" class="nav-link">Uniformes</a></li>
       <li><a href="#faq" class="nav-link">FAQ</a></li>
       <li><a href="#contacto" class="nav-link">Contacto</a></li>
     </ul>
@@ -400,6 +728,8 @@
 <div id="mobile-menu" role="dialog" aria-modal="true">
   <a href="#propuesta" class="nav-link" onclick="closeMobileMenu()">Propuesta</a>
   <a href="#pilares" class="nav-link" onclick="closeMobileMenu()">Pilares</a>
+  <a href="#galeria" class="nav-link" onclick="closeMobileMenu()">Galería</a>
+  <a href="#uniformes" class="nav-link" onclick="closeMobileMenu()">Uniformes</a>
   <a href="#amistosos" class="nav-link" onclick="closeMobileMenu()">Amistosos</a>
   <a href="#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
   <a href="#contacto" class="nav-link" onclick="closeMobileMenu()">Contacto</a>
@@ -489,11 +819,11 @@
     <div class="purple-line mb-12"></div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
       <div class="sr">
-        <div class="stat-number">+120</div>
+        <div class="stat-number">+45</div>
         <p class="text-brand-muted text-sm mt-2 font-medium tracking-wide uppercase" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;">Jugadores Activos</p>
       </div>
       <div class="sr" style="transition-delay:0.1s;">
-        <div class="stat-number">12</div>
+        <div class="stat-number">2</div>
         <p class="text-brand-muted text-sm mt-2 font-medium tracking-wide uppercase" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;">Años Formando Campeones</p>
       </div>
       <div class="sr" style="transition-delay:0.2s;">
@@ -621,6 +951,137 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════════ GALERÍA ═══════════════════════════════ -->
+<section id="galeria" class="py-24 px-5 md:px-10 gallery-section-bg" aria-label="Galería de trabajo">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-14 sr">
+      <p class="section-label mb-3">En el campo y fuera de él</p>
+      <h2 class="italic-hero text-white" style="font-size:clamp(2.2rem,5vw,4rem);">
+        NUESTRO <span style="color:#8B21F2;">TRABAJO</span>
+      </h2>
+      <p class="text-brand-muted mt-4 max-w-lg mx-auto leading-relaxed">
+        Cada práctica, cada partido, cada logro. Esto es lo que pasa dentro de Fuerza Real Academy.
+      </p>
+    </div>
+
+    <!-- Controles de la galería -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 sr">
+      <div id="gallery-counter" style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:700;font-size:1rem;letter-spacing:0.1em;color:#8B21F2;">
+        MOSTRANDO 1–8 DE <span id="gallery-total">0</span> FOTOS
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- Auto-rotate toggle -->
+        <button id="gallery-autoplay-btn" onclick="toggleGalleryAutoplay()"
+          style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(139,33,242,0.15);border:1px solid rgba(139,33,242,0.4);border-radius:6px;padding:0.45rem 1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:#A855F7;cursor:pointer;transition:background .2s;">
+          <span id="gallery-autoplay-icon">⏸</span> <span id="gallery-autoplay-label">Rotación ON</span>
+        </button>
+        <!-- Prev / Next page -->
+        <button onclick="galleryPage(-1)" aria-label="Página anterior"
+          style="width:36px;height:36px;border-radius:50%;background:rgba(139,33,242,0.15);border:1px solid rgba(139,33,242,0.35);color:#A855F7;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;"
+          onmouseover="this.style.background='rgba(139,33,242,0.35)'" onmouseout="this.style.background='rgba(139,33,242,0.15)'">&#8592;</button>
+        <button onclick="galleryPage(1)" aria-label="Página siguiente"
+          style="width:36px;height:36px;border-radius:50%;background:rgba(139,33,242,0.15);border:1px solid rgba(139,33,242,0.35);color:#A855F7;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;"
+          onmouseover="this.style.background='rgba(139,33,242,0.35)'" onmouseout="this.style.background='rgba(139,33,242,0.15)'">&#8594;</button>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div style="height:2px;background:rgba(139,33,242,0.15);border-radius:2px;margin-bottom:28px;overflow:hidden;">
+      <div id="gallery-progress" style="height:100%;background:linear-gradient(90deg,#8B21F2,#A855F7);border-radius:2px;width:0%;transition:width 3s linear;"></div>
+    </div>
+
+    <!-- GRID GALERÍA — se puebla con JS -->
+    <div class="gallery-grid" id="gallery-grid"></div>
+
+    <!-- Dots paginación -->
+    <div id="gallery-dots" style="display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap;"></div>
+
+
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ UNIFORMES ═══════════════════════════════ -->
+<section id="uniformes" class="py-24 px-5 md:px-10 uniforms-section-bg" aria-label="Uniformes de la academia">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-14 sr">
+      <p class="section-label mb-3">Identidad en el campo</p>
+      <h2 class="italic-hero text-white" style="font-size:clamp(2.2rem,5vw,4rem);">
+        NUESTROS <span style="color:#8B21F2;">UNIFORMES</span>
+      </h2>
+      <p class="text-brand-muted mt-4 max-w-lg mx-auto leading-relaxed">
+        Cada temporada, una identidad que representa el orgullo de portar los colores de Fuerza Real Academy.
+      </p>
+    </div>
+
+    <!-- ── TEMPORADA 2025 ── -->
+    <div class="year-divider">
+      <div class="uniforms-year-label">TEMPORADA <span>2025</span></div>
+    </div>
+
+    <div class="uniforms-grid-2" id="grid-2025">
+
+      <div class="uniform-card" data-uniform>
+        <div class="uniform-img-wrap">
+          <span class="uniform-badge">2025</span>
+          <img src="imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.35.33 PM (1).jpeg" alt="Uniforme Local 2025 Fuerza Real Academy" loading="lazy" />
+        </div>
+        <div class="uniform-info">
+          <p class="uniform-title">Local 2025</p>
+          <p class="uniform-detail">Camiseta titular · Blanco & Morado</p>
+        </div>
+      </div>
+
+      <div class="uniform-card" data-uniform>
+        <div class="uniform-img-wrap">
+          <span class="uniform-badge">2025</span>
+          <img src="imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.35.33 PM.jpeg" alt="Uniforme Visitante 2025 Fuerza Real Academy" loading="lazy" />
+        </div>
+        <div class="uniform-info">
+          <p class="uniform-title">Portero 2025</p>
+          <p class="uniform-detail">Camiseta alterna · Morado & Blanco</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── TEMPORADA 2024 ── -->
+    <div class="year-divider" style="margin-top:4rem;">
+      <div class="uniforms-year-label" style="color:#9090A8;">TEMPORADA <span style="color:#6B21A8;">2024</span></div>
+    </div>
+
+    <div class="uniforms-grid-2" id="grid-2024">
+
+      <div class="uniform-card" data-uniform>
+        <div class="uniform-img-wrap">
+          <span class="uniform-badge" style="background:rgba(107,33,168,0.75);">2024</span>
+          <img src="imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.35.35 PM.jpeg" alt="Uniforme Local 2024 Fuerza Real Academy" loading="lazy" />
+        </div>
+        <div class="uniform-info">
+          <p class="uniform-title">Local 2024</p>
+          <p class="uniform-detail">Uniforme titular · Temporada anterior</p>
+        </div>
+      </div>
+
+      <div class="uniform-card" data-uniform>
+        <div class="uniform-img-wrap">
+          <span class="uniform-badge" style="background:rgba(107,33,168,0.75);">2024</span>
+          <img src="imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.35.34 PM.jpeg" alt="Uniforme Visitante 2024 Fuerza Real Academy" loading="lazy" />
+        </div>
+        <div class="uniform-info">
+          <p class="uniform-title">Portero 2024</p>
+          <p class="uniform-detail">Uniforme de portero · Temporada anterior</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
 <!-- ═══════════════════════════════ AMISTOSOS ═══════════════════════════════ -->
 <section id="amistosos" class="py-24 px-5 md:px-10 amistosos-bg" aria-label="Solicitar partido amistoso">
   <div class="max-w-7xl mx-auto">
@@ -697,7 +1158,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-body">
-          Entrenamos de <strong style="color:#A855F7;">Lunes a Viernes</strong> de 4:00 PM a 6:00 PM para que se adapte a la agenda escolar de tu hijo. Contáctanos por WhatsApp para conocer lo que te ofrece Fuerza Real Academy y agendar tu clase de prueba gratis.
+          Entrenamos de <strong style="color:#A855F7;">Lunes a Viernes</strong> en distintos turnos para que se adapte a la agenda escolar de tu hijo. Contamos con horarios matutinos y vespertinos. Contáctanos por WhatsApp para conocer el horario específico de la categoría según la edad de tu hijo.
         </div>
       </div>
 
@@ -907,6 +1368,20 @@
   </div>
 </section>
 
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imagen" onclick="closeLightboxBg(event)">
+  <div id="lightbox-inner">
+    <button id="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+    <button id="lightbox-prev" onclick="lbPrev()" aria-label="Anterior">&#8592;</button>
+    <button id="lightbox-next" onclick="lbNext()" aria-label="Siguiente">&#8594;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <p id="lightbox-caption"></p>
+  </div>
+</div>
+
+
+
 <!-- ═══════════════════════════════ FINAL CTA ═══════════════════════════════ -->
 <section class="py-24 px-5 md:px-10 relative overflow-hidden" aria-label="Llamada a la acción final">
   <div class="absolute inset-0" style="background:linear-gradient(135deg,#0E0E18 0%,#12101E 100%);"></div>
@@ -970,8 +1445,9 @@
       <p class="text-brand-muted text-xs text-center">© 2025 Fuerza Real Academy. Todos los derechos reservados.</p>
     </div>
     <!-- SEO text -->
-    <p class="text-xs text-center mt-6" style="color:#303040;font-size:0.7rem;">Academia de fútbol en Toluca | Entrenamiento de fútbol en Guadalupe Totoltepec | Escuela de fútbol infantil Toluca | Alto rendimiento fútbol Estado de México | Clases de fútbol para niños Toluca</p>
-  </div>
+<p class="text-xs text-center mt-6" style="color:#303040;font-size:0.7rem;">
+Academia de fútbol en Toluca | Fuerza Real Toluca | Academia Fuerza Real | Fuerza Real Academia | Escuela de fútbol infantil Toluca | Entrenamiento de fútbol en Guadalupe Totoltepec | Clases de fútbol para niños Toluca | Academia de alto rendimiento Estado de México | Formación de futbolistas en Toluca | Entrenamiento deportivo infantil | Desarrollo técnico en fútbol | Academia deportiva para niños | Fútbol formativo en Toluca | Entrenadores de fútbol en Toluca | Academia de fútbol cerca de mí | Escuela de fútbol Estado de México | Entrenamiento personalizado fútbol | Club de fútbol en Toluca | Preparación para torneos infantiles | Desarrollo deportivo juvenil
+</p>
 </footer>
 
 <!-- ═══════════════════════════════ WA FLOAT ═══════════════════════════════ -->
@@ -1096,6 +1572,305 @@
       }
     });
   });
+
+  // ══════════════════════════════════════════
+  // GALERÍA ROTATORIA — Motor principal
+  // ══════════════════════════════════════════
+
+  // ── PASO 1: Agrega aquí todas tus fotos reales ──
+  // Formato: { src: 'ruta-o-url.jpg', caption: 'Descripción', alt: 'texto alt SEO' }
+  const GALLERY_PHOTOS = [
+    { src:'imagenes/fuerza real/axel.jpeg', caption:'Axel · Sub-13', alt:'Axel Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/cris.jpeg', caption:'Cris · Sub-13', alt:'Cris Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/cruz.jpeg', caption:'Partido amistoso · Sábado', alt:'Cruz Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/emmanuel.jpeg', caption:'Emmanuel · Sub-13', alt:'Emmanuel Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/joel.jpeg', caption:'Joel · Sub-13', alt:'Joel Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/jose.jpeg', caption:'José · Sub-13', alt:'José Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/kevin.jpeg', caption:'Kevin · Sub-13', alt:'Kevin Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/yahir.jpeg', caption:'Yahir · Sub-13', alt:'Yahir Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/nayeli.jpeg', caption:'Nayeli · Sub-13', alt:'Nayeli Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/raquel.jpeg', caption:'Raquel · Sub-13', alt:'Raquel Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/escudo.jpeg', caption:'Escudo · Acdemia Fuerza Real', alt:'Escudo Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/f.jpeg', caption:'Regate y conducción · Sub-13', alt:'Regate fútbol academia Toluca' },
+    { src:'imagenes/fuerza real/u.jpeg', caption:'Equipo listo · Partido de liga', alt:'Equipo fútbol juvenil Toluca listo para partido' },
+    { src:'imagenes/fuerza real/gragon3.jpeg', caption:'Entrenamiento grupal · Sub-11', alt:'Entrenamiento grupal fútbol Fuerza Real Academy' },
+    { src:'imagenes/fuerza real/fuerza.jpeg', caption:'Visoria especial · Selección', alt:'Visoria fútbol talento jóvenes Toluca' },
+    { src:'imagenes/fuerza real/real.jpeg', caption:'Calentamiento previo · Mañana', alt:'Calentamiento fútbol mañana academia Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.03 PM copy.jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.04 PM (1).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.05 PM (1).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.05 PM (2).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.05 PM.jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.06 PM (1).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.06 PM (2).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.06 PM (3).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.06 PM (4).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.06 PM (5).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.06 PM (6).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.06 PM.jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.07 PM (1).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.07 PM (2).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.07 PM (3).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.07 PM (4).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.07 PM (5).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.07 PM (6).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.04.07 PM.jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.19.44 PM (1).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.19.44 PM (2).jpeg', caption:'Final Futuros Cracks', alt:'Final Futuros Cracks Fuerza Real Academy Toluca' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.19.44 PM (3).jpeg', caption:'Carrera de resistencia · Físico', alt:'Resistencia física fútbol juvenil Estado de México' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.19.44 PM (4).jpeg', caption:'Carrera de resistencia · Físico', alt:'Resistencia física fútbol juvenil Estado de México' },
+    { src:'imagenes/fuerza real/WhatsApp Image 2026-04-01 at 3.19.44 PM.jpeg', caption:'Carrera de resistencia · Físico', alt:'Resistencia física fútbol juvenil Estado de México' },
+    
+    
+  ];
+
+  const GALLERY_PER_PAGE = 8;       // fotos visibles a la vez
+  const GALLERY_AUTOPLAY_MS = 5000; // ms entre rotaciones automáticas
+  const GALLERY_FADE_MS = 500;      // ms del crossfade
+
+  let galleryCurrentPage = 0;
+  let galleryAutoplayTimer = null;
+  let galleryAutoplayOn = true;
+  let galleryProgressTimer = null;
+
+  const galleryGrid = document.getElementById('gallery-grid');
+  const galleryDots = document.getElementById('gallery-dots');
+  const galleryCounter = document.getElementById('gallery-counter');
+  const galleryTotal = document.getElementById('gallery-total');
+  const galleryProgress = document.getElementById('gallery-progress');
+
+  const totalPages = Math.ceil(GALLERY_PHOTOS.length / GALLERY_PER_PAGE);
+
+  galleryTotal.textContent = GALLERY_PHOTOS.length;
+
+  // ── Construir dots ──
+  function buildGalleryDots() {
+    galleryDots.innerHTML = '';
+    for (let i = 0; i < totalPages; i++) {
+      const d = document.createElement('button');
+      d.setAttribute('aria-label', `Página ${i + 1}`);
+      d.style.cssText = `width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s;background:${i === galleryCurrentPage ? '#8B21F2' : 'rgba(139,33,242,0.25)'};transform:${i === galleryCurrentPage ? 'scale(1.4)' : 'scale(1)'};`;
+      d.onclick = () => goToGalleryPage(i);
+      galleryDots.appendChild(d);
+    }
+  }
+
+  function updateGalleryDots() {
+    const dots = galleryDots.querySelectorAll('button');
+    dots.forEach((d, i) => {
+      d.style.background = i === galleryCurrentPage ? '#8B21F2' : 'rgba(139,33,242,0.25)';
+      d.style.transform = i === galleryCurrentPage ? 'scale(1.4)' : 'scale(1)';
+    });
+  }
+
+  // ── Renderizar página ──
+  function renderGalleryPage(page, direction) {
+    const start = page * GALLERY_PER_PAGE;
+    const end = Math.min(start + GALLERY_PER_PAGE, GALLERY_PHOTOS.length);
+    const slice = GALLERY_PHOTOS.slice(start, end);
+
+    // Fade out
+    galleryGrid.style.opacity = '0';
+    galleryGrid.style.transform = direction > 0 ? 'translateX(20px)' : 'translateX(-20px)';
+    galleryGrid.style.transition = `opacity ${GALLERY_FADE_MS}ms ease, transform ${GALLERY_FADE_MS}ms ease`;
+
+    setTimeout(() => {
+      // Rebuild grid
+      galleryGrid.innerHTML = '';
+      slice.forEach((photo, idx) => {
+        const globalIdx = start + idx;
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.dataset.caption = photo.caption;
+        div.dataset.index = globalIdx;
+        div.setAttribute('role', 'button');
+        div.setAttribute('tabindex', '0');
+        div.setAttribute('aria-label', `Ver imagen: ${photo.caption}`);
+        div.innerHTML = `
+          <img src="${photo.src}" alt="${photo.alt}" loading="lazy" />
+          <div class="gallery-overlay">
+            <span class="gallery-overlay-text">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+              Ver imagen
+            </span>
+          </div>`;
+
+        div.addEventListener('click', () => openLightbox(globalIdx));
+        div.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(globalIdx); }
+        });
+
+        const img = div.querySelector('img');
+        const markLoaded = () => div.classList.add('loaded');
+        if (img.complete) markLoaded(); else img.addEventListener('load', markLoaded);
+
+        galleryGrid.appendChild(div);
+      });
+
+      // Update counter
+      const shownEnd = Math.min(end, GALLERY_PHOTOS.length);
+      galleryCounter.innerHTML = `MOSTRANDO ${start + 1}–${shownEnd} DE <span id="gallery-total">${GALLERY_PHOTOS.length}</span> FOTOS`;
+
+      // Fade in
+      galleryGrid.style.transition = `opacity ${GALLERY_FADE_MS}ms ease, transform ${GALLERY_FADE_MS}ms ease`;
+      galleryGrid.style.opacity = '1';
+      galleryGrid.style.transform = 'translateX(0)';
+
+      updateGalleryDots();
+      resetProgressBar();
+    }, GALLERY_FADE_MS);
+  }
+
+  function goToGalleryPage(page, direction) {
+    const dir = direction !== undefined ? direction : (page > galleryCurrentPage ? 1 : -1);
+    galleryCurrentPage = ((page % totalPages) + totalPages) % totalPages;
+    renderGalleryPage(galleryCurrentPage, dir);
+  }
+
+  function galleryPage(dir) {
+    stopGalleryAutoplay();
+    goToGalleryPage(galleryCurrentPage + dir, dir);
+    startGalleryAutoplay();
+  }
+
+  // ── Progress bar ──
+  function resetProgressBar() {
+    galleryProgress.style.transition = 'none';
+    galleryProgress.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        galleryProgress.style.transition = `width ${GALLERY_AUTOPLAY_MS}ms linear`;
+        galleryProgress.style.width = galleryAutoplayOn ? '100%' : '0%';
+      });
+    });
+  }
+
+  // ── Autoplay ──
+  function startGalleryAutoplay() {
+    if (!galleryAutoplayOn) return;
+    stopGalleryAutoplay();
+    galleryAutoplayTimer = setInterval(() => {
+      goToGalleryPage(galleryCurrentPage + 1, 1);
+    }, GALLERY_AUTOPLAY_MS);
+    resetProgressBar();
+  }
+
+  function stopGalleryAutoplay() {
+    clearInterval(galleryAutoplayTimer);
+    galleryAutoplayTimer = null;
+  }
+
+  function toggleGalleryAutoplay() {
+    galleryAutoplayOn = !galleryAutoplayOn;
+    const icon  = document.getElementById('gallery-autoplay-icon');
+    const label = document.getElementById('gallery-autoplay-label');
+    if (galleryAutoplayOn) {
+      icon.textContent  = '⏸';
+      label.textContent = 'Rotación ON';
+      startGalleryAutoplay();
+    } else {
+      icon.textContent  = '▶';
+      label.textContent = 'Rotación OFF';
+      stopGalleryAutoplay();
+      galleryProgress.style.transition = 'none';
+      galleryProgress.style.width = '0%';
+    }
+  }
+
+  // ── Pause autoplay on hover ──
+  galleryGrid.addEventListener('mouseenter', () => { if (galleryAutoplayOn) stopGalleryAutoplay(); });
+  galleryGrid.addEventListener('mouseleave', () => { if (galleryAutoplayOn) startGalleryAutoplay(); });
+
+  // ── Inicializar galería ──
+  buildGalleryDots();
+  renderGalleryPage(0, 1);
+  startGalleryAutoplay();
+
+  // ══════════════════════════════════════════
+  // LIGHTBOX — opera sobre GALLERY_PHOTOS
+  // ══════════════════════════════════════════
+  const lbEl      = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lightbox-img');
+  const lbCaption = document.getElementById('lightbox-caption');
+  let lbIndex = 0;
+
+  function openLightbox(idx) {
+    lbIndex = ((idx % GALLERY_PHOTOS.length) + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
+    lbImg.src = GALLERY_PHOTOS[lbIndex].src;
+    lbImg.alt = GALLERY_PHOTOS[lbIndex].alt;
+    lbCaption.textContent = `${GALLERY_PHOTOS[lbIndex].caption}  (${lbIndex + 1} / ${GALLERY_PHOTOS.length})`;
+    lbEl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
+    if (galleryAutoplayOn) stopGalleryAutoplay();
+  }
+
+  function closeLightbox() {
+    lbEl.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+    if (galleryAutoplayOn) startGalleryAutoplay();
+  }
+
+  function closeLightboxBg(e) { if (e.target === lbEl) closeLightbox(); }
+  function lbPrev() {
+    lbIndex = (lbIndex - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
+    openLightbox(lbIndex);
+  }
+  function lbNext() {
+    lbIndex = (lbIndex + 1) % GALLERY_PHOTOS.length;
+    openLightbox(lbIndex);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!lbEl.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  lbPrev();
+    if (e.key === 'ArrowRight') lbNext();
+  });
+
+  // Touch swipe lightbox
+  let lbTouchX = null;
+  lbEl.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+  lbEl.addEventListener('touchend', e => {
+    if (lbTouchX === null) return;
+    const dx = e.changedTouches[0].clientX - lbTouchX;
+    if (Math.abs(dx) > 50) dx < 0 ? lbNext() : lbPrev();
+    lbTouchX = null;
+  });
+
+  // Touch swipe galería
+  let galTouchX = null;
+  galleryGrid.addEventListener('touchstart', e => { galTouchX = e.touches[0].clientX; }, { passive: true });
+  galleryGrid.addEventListener('touchend', e => {
+    if (galTouchX === null) return;
+    const dx = e.changedTouches[0].clientX - galTouchX;
+    if (Math.abs(dx) > 50) galleryPage(dx < 0 ? 1 : -1);
+    galTouchX = null;
+  });
+
+  // ══════════════════════════════════════════
+  // UNIFORMES · Skeleton + fade-in cards
+  // ══════════════════════════════════════════
+  const uniformCards = document.querySelectorAll('.uniform-card');
+
+  uniformCards.forEach(card => {
+    const img = card.querySelector('img');
+    if (!img) return;
+    const markLoaded = () => card.classList.add('img-loaded');
+    if (img.complete) markLoaded(); else img.addEventListener('load', markLoaded);
+  });
+
+  const uniformObserver = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        uniformObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+  uniformCards.forEach(card => uniformObserver.observe(card));
 </script>
 
 </body>
